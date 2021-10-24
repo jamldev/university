@@ -1,0 +1,124 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>Mercearia Évora</title>
+		<link rel="stylesheet" th:href="@{/css/page.css}"/>
+		<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<!-- Cabeçalho-->
+		<div sec:authorize="!isAuthenticated()">
+			<div class="categoria" id="cabecalho">
+				<div id="cabecalho">
+					<a th:href="@{/index}"><img th:src="@{/img/logo.png}" alt="loja" id="logo"/></a>	
+					<form th:action="@{/product/name}" id="pesquisa">
+						<fieldset>
+							<legend>Pesquisa de Produtos</legend>
+							  <textarea name="name" placeholder="Produtos a pesquisar..."></textarea>
+							  <a th:href="@{/advancedSearch}">Pesquisa Avançada</a>
+							  <input type="submit" value="Pesquisar!" id="pesquisa_normal">
+						  </fieldset>
+					</form>
+					<h3><a th:href="@{/login}"> Login </a> | <a th:href="@{/register}"> Registar </a></h3>
+				</div>
+			</div>
+		</div>
+		<div sec:authorize="hasRole('USER')">
+			<div class="categoria" id="cabecalho">
+				<div id="cabecalho">
+					<a th:href="@{/index}"><img th:src="@{/img/logo.png}" alt="loja" id="logo"/></a>
+					<form th:action="@{/product/name}" id="pesquisa">
+						<fieldset>
+							<legend>Pesquisa de Produtos</legend>
+							  <textarea name="name" placeholder="Produtos a pesquisar..."></textarea>
+							  <a th:href="@{/advancedSearch}">Pesquisa Avançada</a>
+							  <input type="submit" value="Pesquisar!" id="pesquisa_normal"/>
+						  </fieldset>
+					</form>
+					<h3>
+						<a th:href="@{/logout}"> Logout </a> | 
+						<a th:href="@{'/orders/' + ${#request.userPrincipal.principal.Username}}"> Lista de Encomendas</a>
+					</h3>
+				</div>
+			</div>
+		</div>
+        <div sec:authorize="hasRole('ADMIN')">
+			<div class="categoria" id="cabecalho">
+				<div id="cabecalho">
+					<a th:href="@{/index}"><img th:src="@{/img/logo.png}" alt="loja" id="logo"/></a>
+					<form th:action="@{/product/name}" id="pesquisa">
+						<fieldset>
+							<legend>Pesquisa de Produtos</legend>
+							  <textarea name="name" placeholder="Produtos a pesquisar..."></textarea>
+							  <a th:href="@{/advancedSearch}">Pesquisa Avançada</a>
+							  <input type="submit" value="Pesquisar!" id="pesquisa_normal">
+						  </fieldset>
+					</form>
+					<h3>
+						<a th:href="@{/logout}">Logout</a> | 
+						<a th:href="@{/users}"> Lista de Utilizadores </a> | 
+						<a th:href="@{/orders}"> Lista de Encomendas </a> | 
+						<a th:href="@{/makeProduct}"> Criar Produtos </a> | 
+						<a th:href="@{/products}"> Lista de Produtos</a>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<!-- Produtos -->
+		<div sec:authorize="!isAuthenticated()">
+			<div class="categoria" id="produtos">
+				<table>
+					<tr th:each="product: ${listProducts}">
+					  <td><a th:href="@{'/product/' + ${product.id}}"><img th:src="@{'/img/' + ${product.img} + '227.png'}"></a></img></td>
+					  <td>
+						<table>
+							<tr><td id="productname" th:text="${product.name} + ' | ' + ${product.brand}"></td></tr>
+							<tr><td id="productprice" th:text="${product.price} + '€/kg'"></td></tr>
+							<tr><td id="productdescription" th:text="${product.description}"></td></tr>
+						</table>
+					  </td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div sec:authorize="isAuthenticated()">
+			<div class="categoria" id="produtos">
+				<table>
+					<tr th:each="product: ${listProducts}">
+						<td><a th:href="@{'/product/' + ${product.id}}"><img th:src="@{'/img/' + ${product.img} + '227.png'}"></a></img></td>
+						<td>
+							<table>
+								<form th:action="@{/makeOrder}" id="pesquisa">
+									<tr><td id="productname" th:text="${product.name} + ' | ' + ${product.brand}"></td></tr>
+									<tr><td id="productprice" th:text="${product.price} + '€/kg'"></td></tr>
+									<tr><td id="productdescription" th:text="${product.description}"></td></tr>
+									<tr><td><input type="hidden" name="productid" th:value="${product.id}"/>
+										<input type="hidden" name="clientname" th:value="${#request.userPrincipal.principal.Username}"/>
+										<input type="submit" value="Encomendar!" id="encomendar"/></td></tr>
+								</form>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!-- categorias_index -->
+		<div class="categoria" id="categorias_index">
+			<ul>
+  				<a href="#">
+  					<li><label>Frutas</label></li>
+  					<li><label>Vinhos</label></li>
+  					<li><label>Higiene</label></li>
+  				</a>
+			</ul>
+		</div>
+		<!-- About -->
+		<div class="categoria" id="about">
+			<a href="#">
+				<p>Sobre esta página</p>
+			</a>
+		</div>
+	</body>
+</html> 

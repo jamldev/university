@@ -1,0 +1,121 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>Mercearia Évora</title>
+		<link rel="stylesheet" th:href="@{/css/page.css}"/>
+	</head>
+	<body>
+		<!-- Cabeçalho-->
+		<div sec:authorize="!isAuthenticated()">
+			<div class="categoria" id="cabecalho">
+				<div id="cabecalho">
+					<a th:href="@{/index}"><img th:src="@{/img/logo.png}" alt="loja" id="logo"/></a>	
+					<form th:action="@{/product/name}" id="pesquisa">
+						<fieldset>
+							<legend>Pesquisa de Produtos</legend>
+							  <textarea name="name" placeholder="Produtos a pesquisar..."></textarea>
+							  <a th:href="@{/advancedSearch}">Pesquisa Avançada</a>
+							  <input type="submit" value="Pesquisar!" id="pesquisa_normal">
+						  </fieldset>
+					</form>
+					<h3><a th:href="@{/login}"> Login </a> | <a th:href="@{/register}"> Registar </a></h3>
+				</div>
+			</div>
+		</div>
+		<div sec:authorize="hasRole('USER')">
+			<div class="categoria" id="cabecalho">
+				<div id="cabecalho">
+					<a th:href="@{/index}"><img th:src="@{/img/logo.png}" alt="loja" id="logo"/></a>
+					<form th:action="@{/product/name}" id="pesquisa">
+						<fieldset>
+							<legend>Pesquisa de Produtos</legend>
+							  <textarea name="name" placeholder="Produtos a pesquisar..."></textarea>
+							  <a th:href="@{/advancedSearch}">Pesquisa Avançada</a>
+							  <input type="submit" value="Pesquisar!" id="pesquisa_normal"/>
+						  </fieldset>
+					</form>
+					<h3>
+						<a th:href="@{/logout}"> Logout </a> | 
+						<a th:href="@{'/orders/' + ${#request.userPrincipal.principal.Username}}"> Lista de Encomendas</a>
+					</h3>
+				</div>
+			</div>
+		</div>
+        <div sec:authorize="hasRole('ADMIN')">
+			<div class="categoria" id="cabecalho">
+				<div id="cabecalho">
+					<a th:href="@{/index}"><img th:src="@{/img/logo.png}" alt="loja" id="logo"/></a>
+					<form th:action="@{/product/name}" id="pesquisa">
+						<fieldset>
+							<legend>Pesquisa de Produtos</legend>
+							  <textarea name="name" placeholder="Produtos a pesquisar..."></textarea>
+							  <a th:href="@{/advancedSearch}">Pesquisa Avançada</a>
+							  <input type="submit" value="Pesquisar!" id="pesquisa_normal">
+						  </fieldset>
+					</form>
+					<h3>
+						<a th:href="@{/logout}">Logout</a> | 
+						<a th:href="@{/users}"> Lista de Utilizadores </a> | 
+						<a th:href="@{/orders}"> Lista de Encomendas </a> | 
+						<a th:href="@{/makeProduct}"> Criar Produtos </a> | 
+						<a th:href="@{/products}"> Lista de Produtos</a>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<!-- Detalhes -->
+		<div sec:authorize="!isAuthenticated()">
+			<div class="categoria" id="detalhes">
+				<div class="item" id="item_product">
+					<a th:href="@{'/img/' + ${product.img} + '.png'}">
+						<picture>
+							<source media="(min-width: 600px)" th:srcset="@{'/img/' + ${product.img} + '300.png'}">
+							<img th:src="@{'/img/' + ${product.img} + '550.png'}" alt="pera">
+						</picture>
+					</a>
+					<h1 th:text="${product.name} + ' | ' + ${product.brand}"></h1>
+					<h2 th:text="${product.price} + '€/kg'"></h2>
+					<h2 th:text="${product.description}"></h2>
+					<p id="descricao" th:text="${product.info}"></p>	
+				  </div>	
+			</div>
+		</div>
+		<div sec:authorize="isAuthenticated()">
+			<div class="categoria" id="detalhes">
+				<div class="item" id="item_product">
+					<a th:href="@{'/img/' + ${product.img} + '.png'}">
+						<picture>
+							<source media="(min-width: 600px)" th:srcset="@{'/img/' + ${product.img} + '300.png'}">
+							<img th:src="@{'/img/' + ${product.img} + '550.png'}" alt="pera">
+						</picture>
+					</a>
+					<h1 th:text="${product.name} + ' | ' + ${product.brand}"></h1>
+					<h2 th:text="${product.price} + '€/kg'"></h2>
+					<h2 th:text="${product.description}"></h2>
+					<form th:action="@{/makeOrder}">
+						<input type="hidden" name="productid" th:value="${product.id}"/>
+						<input type="hidden" name="clientname" th:value="${#request.userPrincipal.principal.Username}"/>
+						<input type="submit" value="Encomendar!" id="encomendar"/>
+					</form>
+					<p id="descricao" th:text="${product.info}"></p>	
+				  </div>	
+			</div>
+		</div>
+		<!-- categorias_product -->
+		<div class="categoria" id="categorias_product">
+			<ul>
+  				<a href="#">
+  					<li><label>Frutas</label></li>
+  					<li><label>Vinhos</label></li>
+  					<li><label>Higiene</label></li>
+  				</a>
+			</ul>
+		</div>
+		<div class="categoria" id="about">
+			<a href="#">
+				<p>Sobre esta página</p>
+			</a>
+		</div>
+	</body>
+</html> 

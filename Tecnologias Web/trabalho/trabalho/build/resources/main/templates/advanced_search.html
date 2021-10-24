@@ -1,0 +1,123 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>Mercearia Évora</title>
+		<link rel="stylesheet" th:href="@{/css/page.css}"/>
+	</head>
+	<body>
+		<!-- Cabeçalho-->
+		<div sec:authorize="!isAuthenticated()">
+			<div class="categoria" id="cabecalho">
+				<div id="cabecalho">
+					<a th:href="@{/index}"><img th:src="@{/img/logo.png}" alt="loja" id="logo"/></a>	
+					<form th:action="@{/product/name}" id="pesquisa">
+						<fieldset>
+							<legend>Pesquisa de Produtos</legend>
+							  <textarea name="name" placeholder="Produtos a pesquisar..."></textarea>
+							  <a th:href="@{/advancedSearch}">Pesquisa Avançada</a>
+							  <input type="submit" value="Pesquisar!" id="pesquisa_normal">
+						  </fieldset>
+					</form>
+					<h3><a th:href="@{/login}"> Login </a> | <a th:href="@{/register}"> Registar </a></h3>
+				</div>
+			</div>
+		</div>
+		<div sec:authorize="hasRole('USER')">
+			<div class="categoria" id="cabecalho">
+				<div id="cabecalho">
+					<a th:href="@{/index}"><img th:src="@{/img/logo.png}" alt="loja" id="logo"/></a>
+					<form th:action="@{/product/name}" id="pesquisa">
+						<fieldset>
+							<legend>Pesquisa de Produtos</legend>
+							  <textarea name="name" placeholder="Produtos a pesquisar..."></textarea>
+							  <a th:href="@{/advancedSearch}">Pesquisa Avançada</a>
+							  <input type="submit" value="Pesquisar!" id="pesquisa_normal"/>
+						  </fieldset>
+					</form>
+					<h3>
+						<a th:href="@{/logout}"> Logout </a> | 
+						<a th:href="@{'/orders/' + ${#request.userPrincipal.principal.Username}}"> Lista de Encomendas</a>
+					</h3>
+				</div>
+			</div>
+		</div>
+        <div sec:authorize="hasRole('ADMIN')">
+			<div class="categoria" id="cabecalho">
+				<div id="cabecalho">
+					<a th:href="@{/index}"><img th:src="@{/img/logo.png}" alt="loja" id="logo"/></a>
+					<form th:action="@{/product/name}" id="pesquisa">
+						<fieldset>
+							<legend>Pesquisa de Produtos</legend>
+							  <textarea name="name" placeholder="Produtos a pesquisar..."></textarea>
+							  <a th:href="@{/advancedSearch}">Pesquisa Avançada</a>
+							  <input type="submit" value="Pesquisar!" id="pesquisa_normal">
+						  </fieldset>
+					</form>
+					<h3>
+						<a th:href="@{/logout}">Logout</a> | 
+						<a th:href="@{/users}"> Lista de Utilizadores </a> | 
+						<a th:href="@{/orders}"> Lista de Encomendas </a> | 
+						<a th:href="@{/makeProduct}"> Criar Produtos </a> | 
+						<a th:href="@{/products}"> Lista de Produtos</a>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<!-- Pesquisa -->
+		<div class="categoria" id="advanced_search">
+			<form th:action="@{/index}">
+				<ul>
+					<li> 
+	      				<label for="ProdutoPesquisa">Produto a pesquisar:</label>
+	      				<br></br>
+						<textarea name="ProdutoPesquisa" placeholder="Produtos a pesquisar..."></textarea>
+						<br></br>
+					</li>
+					<br></br>
+					<li> 
+	      				<label for="CategoriaProduto">Escolha a categoria do produto:</label>
+	  					<select name="CategoriaProduto" id="CategoriaProduto">
+	    					<option value="Frutas">Frutas</option>
+	    					<option value="Vinhos">Vinhos</option>
+	    					<option value="Higiene">Higiene</option>
+	  					</select>
+					</li>
+					<br></br>
+					<li> 
+	      				<label for="IntervaloPesquisa">Intervalo a pesquisar:</label>
+	      				<br></br>
+						<textarea name="IntervaloPesquisa" placeholder="Intervalo de preço..."></textarea>
+						<br></br>
+					</li>
+					<br></br>
+					<li> 
+	      				<label for="LocalProduto">Escolha a localização do produto:</label>
+  						<select name="LocalProduto" id="LocalProduto">
+    						<option value="Região Norte">Região Norte</option>
+    						<option value="Região Centro">Região Centro</option>
+    						<option value="Região Sul">Região Sul</option>
+  						</select>
+					</li>
+				</ul>
+				<input type="submit" value="Pesquisar">
+			</form>
+  		</div>
+		<!-- categorias_advanced -->
+		<div class="categoria" id="categorias_advanced">
+			<ul>
+  				<a href="#">
+  					<li><label>Frutas</label></li>
+  					<li><label>Vinhos</label></li>
+  					<li><label>Higiene</label></li>
+  				</a>
+			</ul>
+		</div>
+		<!-- About -->
+		<div class="categoria" id="about">
+			<a href="#">
+				<p>About this page</p>
+			</a>
+		</div>
+	</body>
+</html> 

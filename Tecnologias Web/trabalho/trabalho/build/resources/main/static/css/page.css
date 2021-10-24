@@ -1,0 +1,268 @@
+/*  Espaçamento entre categorias de 20 px */
+.categoria{
+	margin: 10px;	
+}
+
+/* Propriedades do cabeçalho */
+#cabecalho{
+	width: 100%;
+	height: 250px;
+	background-color: gray;
+}
+
+/* Propriedades do logo */
+#logo{
+    max-width: 250px;
+    max-height: 250px;
+    float: left;
+}
+
+/* Espamento para baixo do pesquisa */
+#pesquisa {
+	padding-top: 100px;
+}
+
+/* Tamanho da textarea do pesquisa */
+#pesquisa textarea{
+	width: calc(100% - 220px);
+}
+
+/* input do lado direito */
+#pesquisa input{
+	float: right;
+}
+
+/* Propriedades de a em Pesquisa */
+#pesquisa a{
+	padding-top: 15px;
+	float:right;
+}
+
+/* input à esquerda */
+#pesquisa_avancada input {
+	float: left;
+}
+
+/* Propriedades de todos os item */
+.item {
+	padding-left: 40px;
+	padding-bottom: 150px;
+	border-bottom: 5px solid gray;
+}
+
+/* Imagem à esquerda de todos os item */
+.item img {
+	float: left;
+}
+
+/* Item final sem border */
+#item_final {
+	border-bottom: 0px;
+}
+
+/* Item do produto do detalhe sem border */
+#item_product {
+	border-bottom: 0px;
+}
+
+#productname {
+	font-size: 32px;
+	color: black;
+}
+
+#productprice {
+	font-size: 35px;
+	color: black;
+}
+
+#productdescription {
+	font-size: 25px;
+	color: black;
+}
+
+/* Propriedades dos Produtos */
+#produtos {
+	width: 100%;
+	height: 2200px;
+	float: left;
+	background-color: #FFB266;
+}
+
+/* Propriedades dos Detalhes */
+#detalhes {
+	width: 100%;
+	float: left;
+	background-color: #FFB266;
+}
+
+/* Propriedades do Advanced_search */
+#advanced_search {
+	width: 100%;
+	float: left;
+	background-color: #FFB266;
+}
+
+/* Propriedades do textarea em Advanced_search */
+#advanced_search textarea {
+	float: left;
+}
+
+/* Propriedades do input em Advanced_search */
+#advanced_search input {
+	margin-left: 40px;
+}
+
+/* Propriedades das Categorias do Index */
+#categorias_index {
+	background-color: rgb(204, 102, 0);
+	height: 170px;
+	width: 100%;
+	float: left;
+	font-size: 30px;
+}
+
+/* Propriedades das Categorias do Product */
+#categorias_product {
+	background-color: rgb(204, 102, 0);
+	height: 170px;
+	width: 100%;
+	float: left;
+	font-size: 30px;
+}
+
+/* Propriedades das Categorias do Advanced */
+#categorias_advanced {
+	background-color: rgb(204, 102, 0);
+	height: 170px;
+	width: 100%;
+	float: left;
+	font-size: 30px;
+}
+
+/* Propriedades do About */ 
+#about {
+	border-top: 5px solid gray;
+	float: left;
+	width: 100%;
+}
+
+/* Paginação à direita */
+.pagination {
+	float: right;
+}
+
+ /* Propriedades de a na Paginação */
+.pagination a {
+	color: black;
+	float: center;
+	padding: 8px 16px;
+	text-decoration: none;
+	transition: background-color .3s;
+	margin: auto;
+}
+
+ /* Propriedades quando a está ativo na Paginação */
+.pagination a.active {
+	background-color: dodgerblue;
+	color: white;
+}
+
+/* Muda cor de fundo quando a seleção está por cima de a na Paginação */
+.pagination a:hover:not(.active){
+	background-color: #ddd;
+} 
+
+/* Propriedades quando o ecra tem no mínimo 750px */
+@media (min-width: 750px) {
+	
+	body {
+		max-width: 1028px;
+	}
+
+	#categorias_index {
+		width: 205px;
+		height: 2500px;
+	}
+
+
+	#categorias_product {
+		width: 205px;
+		height: 720px;
+	}
+
+	#categorias_advanced {
+		width: 205px;
+		height: 400px;
+	}
+
+
+	#produtos {
+		width: calc(100% - 245px);
+		height: 2500px;
+		float: right;
+	}
+
+	#detalhes {
+		width: calc(100% - 245px);
+		height: 720px;
+		float: right;
+	}
+
+	#advanced_search {
+		width: calc(100% - 245px);
+		height: 400px;
+		float: right;
+	}
+}
+
+/* Propriedades quando o ecra tem no mínimo 600px */
+@media (min-width: 600px) {
+	
+	#descricao {
+		padding-top: 250px;
+	}
+}	
+
+/* body no centro*/
+body {
+	margin: auto;
+}
+
+/* Propriedades do input */
+input[type=submit] {
+    padding:19px 15px; 
+    background:#ccc; 
+    border:0 none;
+    cursor:pointer;
+}
+
+/* Propriedades do a */
+/*-------------------*/
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  font-weight: 700;
+
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+/*-------------------*/
+
+/* Propriedades do textarea*/
+textarea {
+	resize: none;
+}
+
+/* Propriedades dr ul*/
+ul {
+    list-style-type: none;
+}
